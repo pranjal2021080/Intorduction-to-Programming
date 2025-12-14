@@ -1,0 +1,5 @@
+FILE1.txt
+score: 11.75
+most common words: the, quick, brown, fox, jumps
+random words: over, is, lazy, fox, very
+

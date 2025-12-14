@@ -1,0 +1,108 @@
+class Student:
+    def __init__(self, rollno, marks):
+        self.rollno = rollno
+        self.marks = marks  # A dictionary with assessment names as keys and marks as values
+        self.total_marks = sum(marks.values())  # Total marks across all assessments
+        self.grade = None
+
+    def set_grade(self, grade):
+        self.grade = grade
+
+    def __str__(self):
+        return f"Roll No: {self.rollno}, Marks: {self.marks}, Total Marks: {self.total_marks}, Grade: {self.grade}"
+
+class Course:
+    def __init__(self, cname, credits, assessments, policy):
+        self.cname = cname
+        self.credits = credits
+        self.assessments = assessments  # List of tuples (assessment_name, weight_percentage)
+        self.policy = policy  # List of cutoffs for grades A, B, C, D, F
+        self.students = []
+
+    def add_student(self, student):
+        self.students.append(student)
+
+    def calculate_grade(self, total_marks):
+        # Determine the grade based on the policy
+        cutoffs = {'A': self.policy[0], 'B': self.policy[1], 'C': self.policy[2], 'D': self.policy[3]}
+        for grade, cutoff in cutoffs.items():
+            if total_marks >= cutoff:
+                return grade
+        return 'F'
+
+    def do_grading(self):
+        for student in self.students:
+            grade = self.calculate_grade(student.total_marks)
+            student.set_grade(grade)
+
+    def generate_summary(self):
+        grade_counts = {'A': 0, 'B': 0, 'C': 0, 'D': 0, 'F': 0}
+        for student in self.students:
+            grade_counts[student.grade] += 1
+        print(f"Course Name: {self.cname}, Credits: {self.credits}")
+        print("Assessments:")
+        for assessment in self.assessments:
+            print(f" - {assessment[0]}: {assessment[1]}%")
+        print("Grade Cutoffs:")
+        grades = ['A', 'B', 'C', 'D']
+        for i, grade in enumerate(grades):
+            print(f" - {grade}: {self.policy[i]}%")
+        print("\nGrade Distribution:")
+        for grade, count in grade_counts.items():
+            print(f" - {grade}: {count}")
+
+    def print_student_grades_to_file(self, filename="grades.txt"):
+        with open(filename, 'w') as f:
+            for student in self.students:
+                f.write(f"{student.rollno}, {student.total_marks}, {student.grade}\n")
+
+    def search_student(self, rollno):
+        for student in self.students:
+            if student.rollno == rollno:
+                return str(student)
+        return "Student not found!"
+
+# Main program flow
+if __name__ == "__main__":
+    # Setting course details
+    cname = "IP"
+    credits = 4
+    assessments = [("labs", 30), ("midsem", 15), ("assignments", 30), ("endsem", 25)]
+    policy = [80, 65, 50, 40]  # Grade cutoffs for A, B, C, D
+    
+    course = Course(cname, credits, assessments, policy)
+    
+    # Assuming marks.txt contains student marks as: rollno lab_marks midsem_marks assignments_marks endsem_marks
+    with open("marks.txt", "r") as file:
+        for line in file:
+            data = line.strip().split()
+            rollno = data[0]
+            marks = {
+                "labs": int(data[1]),
+                "midsem": int(data[2]),
+                "assignments": int(data[3]),
+                "endsem": int(data[4])
+            }
+            student = Student(rollno, marks)
+            course.add_student(student)
+    
+    # Grading the students
+    course.do_grading()
+
+    while True:
+        print("\nWhat do you want to do?")
+        print("1. Generate summary")
+        print("2. Print student grades to file")
+        print("3. Search for a student record")
+        choice = input("Enter choice (1/2/3, or leave empty to quit): ")
+        
+        if choice == '1':
+            course.generate_summary()
+        elif choice == '2':
+            course.print_student_grades_to_file()
+            print("Grades have been printed to grades.txt")
+        elif choice == '3':
+            rollno = input("Enter the roll number of the student to search: ")
+            print(course.search_student(rollno))
+        else:
+            break
