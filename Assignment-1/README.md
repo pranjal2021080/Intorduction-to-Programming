@@ -1,2 +1,1 @@
-this folder conatains code for the questions in the assignment 1
-
+This directory includes all program files written as part of Assignment 1 for the Introduction to Programming subject.
