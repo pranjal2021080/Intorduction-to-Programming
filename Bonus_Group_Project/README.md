@@ -1,136 +1,78 @@
-1. Project Overview
+# Group Project (Bonus – Assignment 3)
 
-This project implements a command-line based To-Do List Manager using Python.
-The application allows users to manage tasks by adding, updating, deleting, completing, and listing tasks, with all task data persisted in a JSON file.
+## To-Do List Manager (Python)
 
-The project demonstrates the use of:
+---
 
-Object-Oriented Programming (OOP)
+## Project Overview
 
-File handling using JSON
+This project is a **command-line based To-Do List Manager** developed in **Python** as part of the **Bonus (Group Project)** for **Assignment 3 – Introduction to Programming**.
 
-Modular design with classes and methods
+The application allows users to manage daily tasks by **adding, updating, deleting, completing, and listing tasks**. All task data is stored persistently in a **JSON file**, ensuring that data is retained across program executions.
 
-Basic testing using assertions
+---
 
-Menu-driven user interaction
+## Features
 
-This project is developed as part of the Bonus (Group Project) for Assignment 3 – Introduction to Programming.
+The application supports the following operations:
 
-2. Features
+* Add a new task with a unique ID
+* Update an existing task description
+* Delete a task and reassign task IDs
+* Mark tasks as completed
+* Display all tasks with completion status
+* Automatically save and load tasks using a JSON file
 
-The To-Do List Manager supports the following functionalities:
+---
 
-Add Task
+## Project Structure
 
-Create a new task with a unique ID and description.
-
-Task is initially marked as not completed.
-
-Update Task
-
-Modify the description of an existing task using its ID.
-
-Delete Task
-
-Remove a task permanently.
-
-Automatically reassigns task IDs to maintain order.
-
-Mark Task as Completed
-
-Update the status of a task to completed.
-
-List Tasks
-
-Display all tasks with their IDs and completion status.
-
-Completed tasks are marked with ✓, incomplete tasks with ✗.
-
-Persistent Storage
-
-All tasks are saved to a tasks.json file.
-
-Data is automatically loaded when the program restarts.
-
-3. Project Structure
+```
 Bonus_Group_Project
 │
-├── bonus_project.py      # Main application source code
-├── tasks.json            # Stores task data persistently
+├── bonus_project.py      # Main Python source code
+├── tasks.json            # Persistent task storage
 └── README.md             # Project documentation
+```
 
-4. Code Architecture
-4.1 Task Class
+---
 
-Represents an individual task.
+## Code Design
 
-Attributes:
+### Task Class
 
-id : Unique task identifier
+Represents an individual task with:
 
-description : Task description
+* Task ID
+* Task description
+* Completion status
 
-completed : Boolean status
+Includes a method to convert task objects into dictionary format for JSON storage.
 
-Methods:
+---
 
-to_dict() – Converts a Task object to a dictionary for JSON storage
+### TaskManager Class
 
-4.2 TaskManager Class
+Responsible for:
 
-Handles all task-related operations and file handling.
+* Loading and saving tasks from/to a JSON file
+* Adding, updating, deleting, and completing tasks
+* Reassigning task IDs after deletion
+* Displaying tasks in a readable format
 
-Responsibilities:
+---
 
-Loading tasks from JSON
+### Menu-Driven Interface
 
-Saving tasks to JSON
+The `main()` function provides a continuous menu-based interface that allows users to interact with the task manager until they choose to exit.
 
-Adding, updating, deleting, and listing tasks
+---
 
-Reassigning task IDs after deletion
+## File Storage Format
 
-Key Methods:
+Tasks are stored in `tasks.json` using the following format:
 
-load_tasks()
-
-save_tasks()
-
-add_task()
-
-update_task()
-
-delete_task()
-
-mark_task_completed()
-
-list_tasks()
-
-4.3 Menu-Driven Interface (main())
-
-The main() function provides a continuous loop with a menu allowing the user to interact with the application until they choose to exit.
-
-5. Testing
-
-A dedicated test function test_todo_list_manager() is included to validate core functionalities using assert statements, such as:
-
-Task creation
-
-Task updates
-
-Task deletion
-
-ID reassignment
-
-File save/load consistency
-
-This ensures correctness and reliability of the system.
-
-6. File Storage Format (tasks.json)
-
-Tasks are stored in JSON format as shown below:
-
+```json
 [
     {
         "id": 1,
@@ -138,59 +80,66 @@ Tasks are stored in JSON format as shown below:
         "completed": false
     }
 ]
+```
 
+This ensures easy readability and efficient data persistence.
 
-This format ensures:
+---
 
-Human readability
+## Testing
 
-Easy serialization/deserialization
+A test function using **assert statements** is included to verify:
 
-Persistent storage across executions
+* Task creation
+* Task updates
+* Task deletion
+* ID reassignment
+* Data saving and loading
 
-7. How to Run the Program
-Requirements
+This helps ensure correctness and reliability of the application.
 
-Python 3.x
+---
 
-Steps
+## How to Run the Program
 
-Navigate to the project directory:
+### Requirements
 
-cd Bonus_Group_Project
+* Python 3.x
 
+### Steps
 
-Run the program:
+1. Open a terminal and navigate to the project folder.
+2. Run the following command:
 
-python bonus_project.py
+   ```
+   python bonus_project.py
+   ```
+3. Use the on-screen menu to manage tasks.
 
+---
 
-Follow the on-screen menu options to manage tasks.
+## Assumptions and Limitations
 
-8. Limitations & Assumptions
+* The application is designed for **single-user usage**.
+* Minimal input validation is performed.
+* Task IDs are reassigned after deletions for simplicity.
+* Additional computational functions exist in the code but are not invoked.
 
-The application is single-user and command-line based.
+---
 
-Input validation is minimal (assumes correct input format).
+## Learning Outcomes
 
-Task IDs are reassigned after deletion for simplicity.
+This project demonstrates:
 
-Two additional mathematical functions are included but not invoked, serving as unused computational examples.
+* Object-Oriented Programming concepts in Python
+* File handling and JSON-based persistence
+* Menu-driven program design
+* Basic testing using assertions
 
-9. Learning Outcomes
+---
 
-Through this project, the following concepts were practiced:
+## Bonus Assignment Declaration
 
-Object-oriented design in Python
+This project is submitted as the **Bonus Question (Group Project)** for **Assignment 3** under the **Introduction to Programming** course.
 
-Persistent data storage using JSON
-
-File I/O operations
-
-Menu-based program flow
-
-Unit-style testing using assertions
-
-10. Bonus Assignment Declaration
-
-This project is submitted as part of the Bonus Question (Group Project) for Assignment 3 of the Introduction to Programming course.
+---
