@@ -1,0 +1,1 @@
+Hello world! This is a sample text file. This file is used to count word occurrences. Hello again: hope you find this example useful.

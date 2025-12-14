@@ -1,0 +1,10 @@
+this: 3
+hello: 2
+is: 2
+file: 2
+world: 1
+a: 1
+sample: 1
+text: 1
+used: 1
+to: 1
