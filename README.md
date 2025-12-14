@@ -1,6 +1,6 @@
 --
 
-# **Introduction to Programming – Assignment Repository**
+# **Introduction to Programming 
 
 ## **Overview**
 
